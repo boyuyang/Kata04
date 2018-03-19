@@ -1,0 +1,76 @@
+<project name="Kata04" default="help" basedir=".">
+    <description>
+	Kata04 build.
+    </description>
+
+    <!-- Set these properties globally so that they cannot be overridden! -->
+    <property name="src" value="src" />
+    <property name="test" value="test" />
+    <property name="build" value="build" />
+    <property name="dist" value="dist" />
+    <property name="javadoc" value="javadoc" />
+
+    <!-- The classpath typically useful for compiling web-services. -->
+    <path id="classpath">
+        <pathelement location="build" />
+        <pathelement location="lib/junit/junit-4.7.jar" />
+        <pathelement location="dist/kata/test.jar.jar" />
+    </path>
+
+    <!-- Creates the build and dist directories used by the other targets. -->
+    <target name="init">
+        <!-- Create the time stamp -->
+        <tstamp/>
+
+        <mkdir dir="${build}" />
+        <mkdir dir="${dist}/kata" />
+    </target>
+
+    <target name="clean">
+        <delete dir="${build}" includeEmptyDirs="true" />
+        <delete quiet="true" includeEmptyDirs="true">
+           <fileset dir="${dist}/kata" />
+        </delete>        
+    </target>
+    <target name="test-compile">
+        <javac srcdir="${test}/org/kata"
+               destdir="${build}"
+               debug="true"
+               debuglevel="lines,vars,source"
+               includeAntRuntime="yes"
+               deprecation="${deprecation}">
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+
+    <target name="test" depends="test-compile">
+        <junit fork="yes" haltonfailure="yes">
+            <test name="org.kata.TestTest" />
+            <formatter type="plain" usefile="false" />
+            <classpath refid="classpath" />
+        </junit>
+    </target>
+    <!-- ########################################################### -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src}/org/kata" destdir="${build}"
+	       debug="true" debuglevel="lines,vars,source"
+               includeantruntime="true"
+	       deprecation="${deprecation}">
+            <classpath refid="classpath" />
+	</javac>
+    </target>
+
+    <target name="jar" depends="compile">
+	<jar jarfile="${dist}/kata/test.jar">
+            <fileset dir="${build}" includes="**/kata/**" />
+    </jar>
+    </target>    
+    <target name="run">
+         <java classname="org.kata.Test" dir="${dist}/kata" fork="true">
+            <classpath refid="classpath" />
+            <jvmarg value="-Xmx1400m" />
+        </java>
+
+    </target>
+
+</project>
