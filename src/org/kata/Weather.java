@@ -9,7 +9,7 @@ package org.kata;
  *
  * @author boyu yang
  */
-public class Weather {
+public class Weather implements Difference{
     private int day;
     private int temp_diff;
     
@@ -27,10 +27,10 @@ public class Weather {
     public void setDay(int d){
         day = d;
     }
-    public int getTempDiff(){
+    public int getDifference(){
         return temp_diff;
     }
-    public void setTempDiff(int d){
+    public void setDifference(int d){
         temp_diff = d;
     }
 }

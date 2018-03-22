@@ -9,7 +9,7 @@ package org.kata;
  *
  * @author boyu yang
  */
-public class Soccer {
+public class Soccer implements Difference {
     private String name;
     private int goal_diff;
     
@@ -27,10 +27,10 @@ public class Soccer {
     public void setName(String n){
         name = n;
     }
-    public int getGoalDiff(){
+    public int getDifference(){
         return goal_diff;
     }
-    public void setGoalDiff(int d){
+    public void setDifference(int d){
         goal_diff = d;
     }    
 }

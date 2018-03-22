@@ -12,26 +12,15 @@ import java.util.List;
  * @author mana
  */
 public class Util {
-   public static Weather minimumWeather(List<Weather> list){
-        int min = list.get(0).getTempDiff();
-        Weather mw = list.get(0);
-        for (Weather w : list){
-            if (w.getTempDiff() < min){
-                min = w.getTempDiff();
-                mw = w;
+   public static Difference getMinimum(List<Difference> list){
+        int min = list.get(0).getDifference();
+        Difference mw = list.get(0);
+        for (Difference d : list){
+            if (d.getDifference() < min){
+                min = d.getDifference();
+                mw = d;
             }
         }
         return mw;
     }
-    public static Soccer minimumSoccer(List<Soccer> list){
-        int min = list.get(0).getGoalDiff();
-        Soccer sc = list.get(0);
-        for (Soccer s : list){
-            if (s.getGoalDiff() < min){
-                min = s.getGoalDiff();
-                sc = s;
-            }
-        }
-        return sc;
-    }        
 }

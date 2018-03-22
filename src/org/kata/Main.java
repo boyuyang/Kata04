@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
  * @author boyu yang
  */
 public class Main {
-    public static List<Weather> readWeather(String fn){
-        List<Weather> list = new ArrayList();
+    public static List<Difference> readWeather(String fn){
+        List<Difference> list = new ArrayList();
         try{
             BufferedReader br = new BufferedReader(new FileReader(new File(fn)));
             String line = br.readLine();
@@ -56,7 +56,7 @@ public class Main {
                     }
                     min = Integer.parseInt(tk);
                 }
-                w.setTempDiff(max - min); 
+                w.setDifference(max - min); 
                 list.add(w);
                 line = br.readLine();
             }
@@ -65,8 +65,8 @@ public class Main {
         }
         return list;
     }
-    public static List<Soccer> readFootball(String fn){
-        List<Soccer> list = new ArrayList();
+    public static List<Difference> readFootball(String fn){
+        List<Difference> list = new ArrayList();
         try{
             BufferedReader br = new BufferedReader(new FileReader(new File(fn)));
             String line = br.readLine();
@@ -112,7 +112,7 @@ public class Main {
                     a = Integer.parseInt(tk);
                 }
                 int diff = Math.abs(f - a);
-                s.setGoalDiff(diff); 
+                s.setDifference(diff); 
                 list.add(s);
                 line = br.readLine();
             }
@@ -124,12 +124,12 @@ public class Main {
  
     public static void main(String[] args){
         String file_name = "C:/test/kata04/weather.dat";
-        List<Weather> rs = readWeather(file_name);
-        Weather w = Util.minimumWeather(rs);
-        System.out.println(w.getDay() + " : " + w.getTempDiff());
+        List<Difference> rs = readWeather(file_name);
+        Weather w = (Weather)Util.getMinimum(rs);
+        System.out.println(w.getDay() + " : " + w.getDifference());
         file_name = "C:/test/kata04/football.dat";
-        List<Soccer> rs2 = readFootball(file_name);
-        Soccer s = Util.minimumSoccer(rs2);
-        System.out.println(s.getName() + " : " + s.getGoalDiff());
+        List<Difference> rs2 = readFootball(file_name);
+        Soccer s = (Soccer)Util.getMinimum(rs2);
+        System.out.println(s.getName() + " : " + s.getDifference());
     }
 }
